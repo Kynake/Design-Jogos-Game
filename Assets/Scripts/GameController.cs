@@ -7,13 +7,8 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public TextMeshProUGUI marcadorPontuacao;
     public TextMeshProUGUI tempo;
     public TextMeshProUGUI qntMoedas;
-    // public string proximaFase;
-
-    [SerializeField]
-    private int pontuacao = 0;
 
     [SerializeField]
     private int moedasNaFase = 0;
@@ -23,18 +18,13 @@ public class GameController : MonoBehaviour
 
     private float timer = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-
-        RocketController.colisaoAcao += MarcarPontoBonus;
-        Destructable.Destruido += MarcarPontoBonus;
         GameObject[] moedas = GameObject.FindGameObjectsWithTag("score");
         moedasNaFase = moedas.Length;
         atualizarGUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
         atualizarGUI();
@@ -44,30 +34,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void MarcarPonto(PontuacaoJogo x)
-    {
-        pontuacao += (int)x;
-    }
-
-    public void MarcarPontoParedes()
-    {
-        this.MarcarPonto(PontuacaoJogo.PontuacaoParede);
-    }
-
-    public void MarcarPontoBonus()
-    {
-        this.MarcarPonto(PontuacaoJogo.PontuacaoBonus);
-    }
-
-    public void MarcarPontoBonus(int ponto)
-    {
-        pontuacao += ponto;
-    }
-
     private void atualizarGUI()
     {
-        marcadorPontuacao.text = $"Pontuação: {pontuacao:D3}";
-
         GameObject[] moedas = GameObject.FindGameObjectsWithTag("score");
         moedasColetadas = moedasNaFase - moedas.Length;
         qntMoedas.text = $"{moedasColetadas:D2}/{moedasNaFase:D2}";
@@ -88,10 +56,4 @@ public class GameController : MonoBehaviour
         // SceneManager.LoadScene(proximaFase);
     }
 
-}
-
-public enum PontuacaoJogo
-{
-    PontuacaoParede = 5,
-    PontuacaoBonus = 15,
 }
