@@ -112,10 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6c090b163543e4c9fafa0b4dae98b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marcadorPontuacao: {fileID: 0}
   tempo: {fileID: 1117051439860896511}
   qntMoedas: {fileID: 1117051439648911253}
-  pontuacao: 0
   moedasNaFase: 0
   moedasColetadas: 0
 --- !u!1 &1117051439344622802
@@ -391,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Tempo: 20s'
+  m_text: 'Time: 20s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
