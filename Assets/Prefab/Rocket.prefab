@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 5110661581467495315}
   - component: {fileID: 6446854696013481908}
   - component: {fileID: 595181515768099086}
+  - component: {fileID: 1190177199928868673}
   m_Layer: 8
   m_Name: Rocket
   m_TagString: Untagged
@@ -879,3 +880,22 @@ MonoBehaviour:
   m_DefaultActionMap: Default
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &1190177199928868673
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755893085460728852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d21f61044062cb46b8b200d41990c98, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
