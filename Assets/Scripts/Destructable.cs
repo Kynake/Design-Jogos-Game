@@ -72,6 +72,6 @@ public class Destructable : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider) => _isBeingDestroyed = (collider.gameObject.layer.toLayerMask() & thrustersLayer) != 0;
+    private void OnTriggerStay2D(Collider2D collider) => _isBeingDestroyed = (collider.gameObject.layer.toLayerMask() & thrustersLayer) != 0;
     private void OnTriggerExit2D(Collider2D collider) => _isBeingDestroyed = (collider.gameObject.layer.toLayerMask() & thrustersLayer) == 0;
 }
