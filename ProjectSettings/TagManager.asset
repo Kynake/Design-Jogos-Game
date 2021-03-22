@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - destrutiveis
+  - inimigos
+  - pontuacao
+  - barreira
+  - score
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Rocket
+  - Debris
+  - FlamingAsteroids
+  - Score
+  - Thrusters
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Walls
+    uniqueID: 3830910087
+    locked: 0
+  - name: Rocket
+    uniqueID: 3779935811
+    locked: 0
+  - name: Thrusters
+    uniqueID: 4113792831
+    locked: 0
+  - name: Debris
+    uniqueID: 3330557823
+    locked: 0
+  - name: Score
+    uniqueID: 2764709487
+    locked: 0
+  - name: Spark
+    uniqueID: 3095798559
+    locked: 0
