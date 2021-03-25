@@ -8,7 +8,6 @@ public class MenuFinal : MonoBehaviour
 {
     private void OnCarregarFase(InputValue input)
     {
-        Debug.Log("OnCarregarFase");
         SceneManager.LoadScene(0);
     }
 

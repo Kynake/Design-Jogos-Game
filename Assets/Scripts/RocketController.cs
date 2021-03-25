@@ -28,11 +28,13 @@ public class RocketController : MonoBehaviour
     public float backwardsAngle;
     public float backwardStrength;
 
-
     public LayerMask scoreLayer;
     public LayerMask asteroidLayer;
     public LayerMask flamingAsteroidsLayer;
     public LayerMask indestructableLayer;
+
+    private static GameObject gameControllerObject = null;
+    private static GameController gameController = null;
 
     public GameObject smokeTrail;
     public Queue<GameObject> smokeTrailList;
@@ -60,6 +62,15 @@ public class RocketController : MonoBehaviour
         _leftDirection = _prefabDirection;
         _rightDirection = _prefabDirection;
 
+        // Get gameController reference to update game stats
+        if(gameControllerObject == null) {
+            gameControllerObject = GameObject.Find("Canvas");
+        }
+
+        if(gameControllerObject != null && gameController == null) {
+            gameController = gameControllerObject.GetComponent<GameController>();
+        }
+
         StartCoroutine(LeaveTrail());
         StartCoroutine(EraseTrail());
     }
@@ -84,9 +95,21 @@ public class RocketController : MonoBehaviour
     private void OnRightThruster(InputValue input) => _rightDirection = getThrusterDirection(input);
 
     // Level change stuff
-    private void OnResetLevel(InputValue input) => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    private void OnNextLevel(InputValue input) => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    private void OnPreviousLevel(InputValue input) => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    private void OnResetLevel(InputValue input) {
+        GameController.restarts++;
+        gameController.addLevelTimeToTotal();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnNextLevel(InputValue input) {
+        gameController.addLevelTimeToTotal();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private void OnPreviousLevel(InputValue input) {
+        gameController.addLevelTimeToTotal();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
 
     private Vector2 getThrusterDirection(InputValue input)
     {
@@ -160,8 +183,12 @@ public class RocketController : MonoBehaviour
         if (layer == flamingAsteroidsLayer)
         {
             // dead
+            GameController.deaths++;
+            gameController.addLevelTimeToTotal();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
+        } else if(layer == indestructableLayer) {
+            GameController.wallCollisions++;
         }
     }
 

@@ -10,6 +10,7 @@ public class Destructable : MonoBehaviour
     public Vector2 startingVelocity;
     public float startingRotation;
     public LayerMask thrustersLayer;
+    public LayerMask collideScoreLayers;
     public int point;
 
     public delegate void DestruidoAcao(int point);
@@ -23,6 +24,8 @@ public class Destructable : MonoBehaviour
     private float _baseRed;
     private const float _maxRed = 1;
 
+    private static GameObject gameControllerObject = null;
+    private static GameController gameController = null;
 
     private void Awake()
     {
@@ -33,6 +36,15 @@ public class Destructable : MonoBehaviour
     private void Start()
     {
         _baseRed = _sprite.color.r;
+
+        // Get gameController reference to update game stats
+        if(gameControllerObject == null) {
+            gameControllerObject = GameObject.Find("Canvas");
+        }
+
+        if(gameControllerObject != null && gameController == null) {
+            gameController = gameControllerObject.GetComponent<GameController>();
+        }
     }
 
     protected virtual void OnEnable()
@@ -69,9 +81,21 @@ public class Destructable : MonoBehaviour
         if(_destroyedAmount == 1) {
             Destruido?.Invoke(point);
             gameObject.SetActive(false);
+            increaseDestructionStat();
         }
     }
 
     private void OnTriggerStay2D(Collider2D collider) => _isBeingDestroyed = (collider.gameObject.layer.toLayerMask() & thrustersLayer) != 0;
     private void OnTriggerExit2D(Collider2D collider) => _isBeingDestroyed = (collider.gameObject.layer.toLayerMask() & thrustersLayer) == 0;
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision) {
+        var layer = collision.gameObject.layer.toLayerMask();
+        if((layer & collideScoreLayers) != 0) {
+            GameController.debrisCollisions++;
+        }
+    }
+
+    protected virtual void increaseDestructionStat() {
+        GameController.debrisDestroyed++;
+    }
 }

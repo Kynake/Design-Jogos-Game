@@ -9,7 +9,7 @@ public class FlamingAsteroidController : AsteroidController
 
     private static ObjectPool _itemPool = null;
 
-    
+
     protected override IEnumerator destroyAfter()
     {
         yield return new WaitForSeconds(lifetime);
@@ -17,4 +17,7 @@ public class FlamingAsteroidController : AsteroidController
         gameObject.SetActive(false);
     }
 
+    protected override void increaseDestructionStat() {
+        GameController.flamingAsteroidsDestroyed++;
+    }
 }

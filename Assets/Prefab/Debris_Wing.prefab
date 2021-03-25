@@ -180,7 +180,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerSecond: 1.6
   cooldownPerSecond: 0.01
+  startingVelocity: {x: 0, y: 0}
+  startingRotation: 0
   thrustersLayer:
     serializedVersion: 2
     m_Bits: 4096
+  collideScoreLayers:
+    serializedVersion: 2
+    m_Bits: 4352
   point: 10

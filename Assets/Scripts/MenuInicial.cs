@@ -8,7 +8,9 @@ public class MenuInicial : MonoBehaviour
 {
     private void OnCarregarFase(InputValue input)
     {
-        Debug.Log("OnCarregarFase");
+        // Reset Stats when loading first level
+        GameController.resetStats();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
