@@ -7,13 +7,29 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public TextMeshProUGUI marcadorPontuacao;
+    /*
+    more possible stats:
+
+    times stuck?
+
+    most attempted level: level name + restarts (death + restarts) in level
+    */
+
+    // Static Stats
+    public static float totalTime = 0;
+    public static int deaths = 0;
+    public static int restarts = 0;
+
+    public static int wallCollisions = 0;
+    public static int debrisCollisions = 0;
+    public static int asteroidCollisions = 0;
+
+    public static int debrisDestroyed = 0;
+    public static int asteroidsDestroyed = 0;
+    public static int flamingAsteroidsDestroyed = 0;
+
     public TextMeshProUGUI tempo;
     public TextMeshProUGUI qntMoedas;
-    // public string proximaFase;
-
-    [SerializeField]
-    private int pontuacao = 0;
 
     [SerializeField]
     private int moedasNaFase = 0;
@@ -23,18 +39,13 @@ public class GameController : MonoBehaviour
 
     private float timer = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-
-        RocketController.colisaoAcao += MarcarPontoBonus;
-        Destructable.Destruido += MarcarPontoBonus;
         GameObject[] moedas = GameObject.FindGameObjectsWithTag("score");
         moedasNaFase = moedas.Length;
         atualizarGUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
         atualizarGUI();
@@ -44,30 +55,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void MarcarPonto(PontuacaoJogo x)
-    {
-        pontuacao += (int)x;
-    }
-
-    public void MarcarPontoParedes()
-    {
-        this.MarcarPonto(PontuacaoJogo.PontuacaoParede);
-    }
-
-    public void MarcarPontoBonus()
-    {
-        this.MarcarPonto(PontuacaoJogo.PontuacaoBonus);
-    }
-
-    public void MarcarPontoBonus(int ponto)
-    {
-        pontuacao += ponto;
-    }
-
     private void atualizarGUI()
     {
-        marcadorPontuacao.text = $"Pontuação: {pontuacao:D3}";
-
         GameObject[] moedas = GameObject.FindGameObjectsWithTag("score");
         moedasColetadas = moedasNaFase - moedas.Length;
         qntMoedas.text = $"{moedasColetadas:D2}/{moedasNaFase:D2}";
@@ -88,10 +77,42 @@ public class GameController : MonoBehaviour
         // SceneManager.LoadScene(proximaFase);
     }
 
-}
+    // Game Stats
 
-public enum PontuacaoJogo
-{
-    PontuacaoParede = 5,
-    PontuacaoBonus = 15,
+    public void addLevelTimeToTotal() {
+        totalTime += timer;
+    }
+
+    public static void resetStats() {
+        totalTime = 0;
+        deaths = 0;
+        restarts = 0;
+
+        wallCollisions = 0;
+        debrisCollisions = 0;
+        asteroidCollisions = 0;
+
+        debrisDestroyed = 0;
+        asteroidsDestroyed = 0;
+        flamingAsteroidsDestroyed = 0;
+    }
+
+    /*
+    totalTime
+    deaths
+    restarts
+
+    totalCollisions
+    wallCollisions
+    debrisCollisions
+    asteroidCollisions
+    flamingAsteroidCollisions
+
+    totalObjectsDestroyed
+    debrisDestroyed
+    asteroidsDestroyed
+    flamingAsteroidsDestroyed
+
+    most attempted level: level name + restarts (death + restarts) in level
+    */
 }

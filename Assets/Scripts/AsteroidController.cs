@@ -27,4 +27,14 @@ public class AsteroidController : Destructable
         gameObject.SetActive(false);
     }
 
+    protected override void OnCollisionEnter2D(Collision2D collision) {
+        var layer = collision.gameObject.layer.toLayerMask();
+        if((layer & collideScoreLayers) != 0) {
+            GameController.asteroidCollisions++;
+        }
+    }
+
+    protected override void increaseDestructionStat() {
+        GameController.asteroidsDestroyed++;
+    }
 }
