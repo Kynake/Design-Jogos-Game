@@ -71,8 +71,8 @@ public class RocketController : MonoBehaviour
             gameController = gameControllerObject.GetComponent<GameController>();
         }
 
-        StartCoroutine(LeaveTrail());
-        StartCoroutine(EraseTrail());
+        // StartCoroutine(LeaveTrail());
+        // StartCoroutine(EraseTrail());
     }
 
 
