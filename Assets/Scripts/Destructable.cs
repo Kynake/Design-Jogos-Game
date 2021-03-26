@@ -11,10 +11,6 @@ public class Destructable : MonoBehaviour
     public float startingRotation;
     public LayerMask thrustersLayer;
     public LayerMask collideScoreLayers;
-    public int point;
-
-    public delegate void DestruidoAcao(int point);
-    public static event DestruidoAcao Destruido;
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _sprite;
@@ -79,7 +75,6 @@ public class Destructable : MonoBehaviour
         _sprite.color = newColor;
 
         if(_destroyedAmount == 1) {
-            Destruido?.Invoke(point);
             gameObject.SetActive(false);
             increaseDestructionStat();
         }
